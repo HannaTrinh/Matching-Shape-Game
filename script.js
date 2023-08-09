@@ -7,11 +7,17 @@ const startGameBtn = document.querySelector("button");
 const errorMsg = document.querySelector("#error");
 startGameBtn.style.display = "none";
 errorMsg.style.opacity = 0;
-const scores = JSON.parse(localStorage.getItem('scores')) || [];
+let scores = JSON.parse(localStorage.getItem('scores')) || [];
+var lastKey;
 
 
-$(document).ready(shuffle);
-$("button").click(startGame);
+$(document).ready(function(e) {
+    shuffle();
+    showScore();
+});
+
+$(".play-btn").click(startGame);
+$(".end-btn").click(endGame);
 
 function startGame() {
     window.location.reload();
@@ -92,24 +98,42 @@ dropZones.forEach(function(value) {
     value.addEventListener("dragover", allowDrop);
 })
 
-//localStorage.setItem("scores", string);
-
 function addScore() {
-    scores.push(score+1);
+    let num = score == 0 ? 0 : score;
+    scores.push(num);
+    localStorage.setItem(localStorage.length, num);
+    showScore();
+}
+
+function saveData() {
+    lastKey = 
     localStorage.setItem("scores", JSON.stringify(scores));
 }
 
 function showScore() {
-    if(scores.length === 0) {
-        return;
+    let n = localStorage.length;
+    const ul = document.querySelector("ul");
+    if(n === 0 || ul.children.length === 0 ){
+        for (var i = 0; i < localStorage.length; i++) {
+            console.log(localStorage.key(i) + "=[" + localStorage.getItem(localStorage.key(i)) + "]");
+            $(".List").append('<li>' + "[Game " + i + "] : " + localStorage.getItem(localStorage.key(i)) + '</li>');
+        }
+    } else {
+        var lastScore = localStorage.getItem(n-1);
+        $(".List").append('<li>' + "[Game " + (n-1) + "] : " + lastScore + '</li>');
     }
-    var list = '<li>' + score + '</li>';
-    $('.List').append(list);
 }
 
-$("#reset").click(function() {
+$("#reset").click(function() { 
+    //  Clears scoreboard
+    console.log("clicked");
+    scores = [];
     localStorage.clear();
 })
+
+for (var i = 0; i < localStorage.length; i++) {
+    console.log(localStorage.key(i) + "=[" + localStorage.getItem(localStorage.key(i)) + "]");
+}
    
 
 

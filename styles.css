@@ -25,6 +25,10 @@ button {
 	border-radius: 5px;
 }
 
+.end-btn {
+	border-radius: none;
+}
+
 .drop-section,
 .drag-section {
 	display: flex;

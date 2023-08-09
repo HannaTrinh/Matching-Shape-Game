@@ -115,8 +115,7 @@ function showScore() {
     const ul = document.querySelector("ul");
     if(n === 0 || ul.children.length === 0 ){
         for (var i = 0; i < localStorage.length; i++) {
-            console.log(localStorage.key(i) + "=[" + localStorage.getItem(localStorage.key(i)) + "]");
-            $(".List").append('<li>' + "[Game " + i + "] : " + localStorage.getItem(localStorage.key(i)) + '</li>');
+            $(".List").append('<li>' + "[Game " + i + "] : " + localStorage.getItem(i) + '</li>');
         }
     } else {
         var lastScore = localStorage.getItem(n-1);
@@ -130,10 +129,6 @@ $("#reset").click(function() {
     scores = [];
     localStorage.clear();
 })
-
-for (var i = 0; i < localStorage.length; i++) {
-    console.log(localStorage.key(i) + "=[" + localStorage.getItem(localStorage.key(i)) + "]");
-}
    
 
 

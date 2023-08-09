@@ -9,7 +9,6 @@ const endGamebtn = document.querySelector(".end-btn");
 endGamebtn.style.display = "inline";
 startGameBtn.style.display = "none";
 errorMsg.style.opacity = 0;
-let scores = JSON.parse(localStorage.getItem('scores')) || [];
 var lastKey;
 
 
@@ -102,8 +101,7 @@ dropZones.forEach(function(value) {
 })
 
 function addScore() {
-    let num = score == 0 ? 0 : score;
-    scores.push(num);
+    let num = score == 0 ? 0 : score+1;
     localStorage.setItem(localStorage.length, num);
     showScore();
 }
@@ -124,7 +122,6 @@ function showScore() {
 $("#reset").click(function() { 
     //  Clears scoreboard
     console.log("clicked");
-    scores = [];
     localStorage.clear();
 })
    

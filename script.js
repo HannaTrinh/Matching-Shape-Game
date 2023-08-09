@@ -5,6 +5,8 @@ const dropZones = document.querySelectorAll(".drop");
 document.querySelector('#score').innerText = score;
 const startGameBtn = document.querySelector("button");
 const errorMsg = document.querySelector("#error");
+const endGamebtn = document.querySelector(".end-btn");
+endGamebtn.style.display = "inline";
 startGameBtn.style.display = "none";
 errorMsg.style.opacity = 0;
 let scores = JSON.parse(localStorage.getItem('scores')) || [];
@@ -28,6 +30,7 @@ function endGame() {
     startGameBtn.style.display = "inline";
     addScore();
     document.querySelector(".drag-section").style.border = "none";
+    endGamebtn.style.display = "none";
 }
 
 function shuffle(){
@@ -103,11 +106,6 @@ function addScore() {
     scores.push(num);
     localStorage.setItem(localStorage.length, num);
     showScore();
-}
-
-function saveData() {
-    lastKey = 
-    localStorage.setItem("scores", JSON.stringify(scores));
 }
 
 function showScore() {
